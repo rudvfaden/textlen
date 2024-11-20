@@ -1,16 +1,16 @@
 [tool.poetry]
-name = "length"
+name = "textlen"
 version = "0.1.0"
 description = ""
 authors = ["Rud Faden <rudfaden@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.1"
+python = "^3.7"
 typer = "^0.13.1"
 
 [tool.poetry.scripts]
-lenght = "length.main:app"
+textlen = "textlen.main:app"
 
 [build-system]
 requires = ["poetry-core"]

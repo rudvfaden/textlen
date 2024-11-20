@@ -7,7 +7,7 @@ console = Console()
 
 
 @app.command()
-def length(string: str):
+def textlen(string: str):
     """Returns the length of a string
 
     Args:
