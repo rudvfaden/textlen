@@ -7,12 +7,15 @@ console = Console()
 
 
 @app.command()
-def textlen(string: str):
+def textlen(string: str, trim: bool = typer.Option(False, help="Trim leading and trailing whitespace")):
     """Returns the length of a string
 
     Args:
         string (str): any string
+        trim (bool): whether to trim whitespace
     """
+    if trim:
+        string = string.strip()
     lenght = str(len(string))
     table = Table("String", "Length")
     table.add_row(string, lenght)
