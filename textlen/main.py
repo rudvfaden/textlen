@@ -7,7 +7,8 @@ console = Console()
 
 
 @app.command()
-def textlen(string: str, trim: bool = typer.Option(False, help="Trim leading and trailing whitespace")):
+def textlen(string: str, trim: bool = typer.Option(
+        False, help="Trim leading and trailing whitespace")):
     """Returns the length of a string
 
     Args:
