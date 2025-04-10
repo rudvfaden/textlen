@@ -8,7 +8,7 @@ console = Console()
 
 @app.command()
 def textlen(string: str, trim: bool = typer.Option(
-        False, help="Trim leading and trailing whitespace")):
+        False, help="Trim leading and trailing whitespace")) -> None:
     """Returns the length of a string
 
     Args:
@@ -17,9 +17,9 @@ def textlen(string: str, trim: bool = typer.Option(
     """
     if trim:
         string = string.strip()
-    lenght = str(len(string))
+    length = str(len(string))
     table = Table("String", "Length")
-    table.add_row(string, lenght)
+    table.add_row(string, length)
     console.print(table)
 
 
