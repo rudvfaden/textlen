@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "textlen"
 version = "0.1.0"
-description = ""
+description = "A simple CLI tool to calculate the length of a string."
 authors = ["Rud Faden <rudfaden@gmail.com>"]
 readme = "README.md"
 
