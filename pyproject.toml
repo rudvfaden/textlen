@@ -10,7 +10,7 @@ python = "^3.7"
 typer = "^0.13.1"
 
 [tool.poetry.scripts]
-textlen = "textlen.main:app"
+textlen = "textlen.main:main"
 
 [build-system]
 requires = ["poetry-core"]

@@ -23,5 +23,10 @@ def textlen(
     typer.secho(f"{label}: {string_len}", fg=typer.colors.GREEN)
 
 
-if __name__ == "__main__":
+def main():
+    """Console entry point for packaging / installers."""
     app()
+
+
+if __name__ == "__main__":
+    main()
