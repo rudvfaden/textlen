@@ -41,3 +41,17 @@ def test_trim_option():
     result = runner.invoke(app, [input_string, "--trim"])
     assert result.exit_code == 0
     assert "Length: 11" in result.stdout  # trimmed spaces
+    
+def test_words_option():
+    """Test word counting with --words flag"""
+    input_string = "hello world from textlen"
+    
+    # With --words flag
+    result = runner.invoke(app, [input_string, "--words"])
+    assert result.exit_code == 0
+    assert "Words: 4" in result.stdout  # 4 words
+    
+    # Without --words flag (character count)
+    result = runner.invoke(app, [input_string])
+    assert result.exit_code == 0
+    assert "Length: 24" in result.stdout  # includes spaces
