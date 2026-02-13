@@ -7,11 +7,11 @@ app = typer.Typer(add_completion=True)
 def textlen(
     string: str,
     trim: bool = typer.Option(
-        False, help="Trim leading and trailing whitespace"),
+        False, "--trim", "-t", help="Trim leading and trailing whitespace"),
     count_bytes: bool = typer.Option(
-        False, "--bytes", help="Count bytes instead of characters"),
+        False, "--bytes", "-b", help="Count bytes instead of characters"),
     count_words: bool = typer.Option(
-        False, "--words", help="Count words instead of characters")
+        False, "--words", "-w", help="Count words instead of characters")
 ) -> None:
     """Returns the length of a string"""
     if trim:
