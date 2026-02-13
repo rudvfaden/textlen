@@ -27,3 +27,17 @@ def test_bytes_option():
     result = runner.invoke(app, ["café"])
     assert result.exit_code == 0
     assert "Length: 4" in result.stdout  # 4 characters
+    
+def test_trim_option():
+    """Test trimming whitespace with --trim flag"""
+    input_string = "   hello world   "
+    
+    # Without trim
+    result = runner.invoke(app, [input_string])
+    assert result.exit_code == 0
+    assert "Length: 17" in result.stdout  # includes spaces
+    
+    # With trim
+    result = runner.invoke(app, [input_string, "--trim"])
+    assert result.exit_code == 0
+    assert "Length: 11" in result.stdout  # trimmed spaces
