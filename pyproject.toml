@@ -6,7 +6,7 @@ authors = ["Rud Faden <rudfaden@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
 typer = "^0.13.1"
 
 [tool.poetry.scripts]

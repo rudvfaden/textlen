@@ -18,7 +18,8 @@ def textlen(
         string = string.strip()
 
     if count_bytes and count_words:
-        raise typer.BadParameter("Cannot use --bytes and --words together")
+        typer.echo("Cannot use --bytes and --words together")
+        raise typer.Exit(code=1)  
     elif count_bytes:
         string_len = len(string.encode('utf-8'))
         label = "Bytes"
