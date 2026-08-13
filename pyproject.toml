@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "textlen"
-version = "0.1.4"
-description = "A simple CLI tool to calculate the length or bytes of a string."
+version = "0.1.5"
+description = "A fast, simple CLI tool to calculate the character length, byte count, or word count of a string."
 authors = ["Rud Faden <rudfaden@gmail.com>"]
 readme = "README.md"
 
