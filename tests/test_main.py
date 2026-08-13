@@ -55,3 +55,9 @@ def test_words_option():
     result = runner.invoke(app, [input_string])
     assert result.exit_code == 0
     assert "Length: 24" in result.stdout  # includes spaces
+
+def test_mutually_exclusive_options():
+    """Test that --bytes and --words cannot be used together"""
+    result = runner.invoke(app, ["hello", "--bytes", "--words"])
+    assert result.exit_code != 0
+    assert "Cannot use --bytes and --words together" in result.stdout
