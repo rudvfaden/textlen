@@ -8,13 +8,14 @@ class MetricMode(str, Enum):
     length = "length"
     bytes = "bytes"
     words = "words"
+    all = "all"
 
 
 TRIM_OPTION = typer.Option(
     False, "--trim", "-t", help="Trim leading and trailing whitespace"
 )
 MODE_OPTION = typer.Option(
-    MetricMode.length, "--mode", "-m", help="Metric to calculate"
+    [MetricMode.length], "--mode", "-m", help="Metric(s) to calculate"
 )
 
 
@@ -22,7 +23,7 @@ MODE_OPTION = typer.Option(
 def textlen(
     string: str,
     trim: bool = TRIM_OPTION,
-    mode: MetricMode = MODE_OPTION,
+    mode: list[MetricMode] = MODE_OPTION,
 ) -> None:
     """Returns the length of a string"""
     if trim:
@@ -35,11 +36,16 @@ def textlen(
         MetricMode.words: lambda s: ("Words", len(s.split())),
     }
 
-    # Fetch and execute the correct calculator with zero if-else checks
-    label, val = dispatch[mode](string)
-
     typer.echo(f"String: {string}")
-    typer.secho(f"{label}: {val}", fg=typer.colors.GREEN)
+    if MetricMode.all in mode:
+        for func in dispatch.values():
+            label, val = func(string)
+            typer.secho(f"{label}: {val}", fg=typer.colors.GREEN)
+        return
+
+    for m in mode:
+        label, val = dispatch[m](string)
+        typer.secho(f"{label}: {val}", fg=typer.colors.GREEN)
 
 
 def main():
