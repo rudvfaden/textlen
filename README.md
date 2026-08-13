@@ -8,7 +8,7 @@ A fast and simple Command Line Interface (CLI) tool to calculate the character l
 - **Byte Counting**: Count the UTF-8 bytes of a string (useful for multi-byte characters/emojis).
 - **Word Counting**: Count the number of whitespace-separated words in a string.
 - **Whitespace Trimming**: Trim leading and trailing whitespace before calculation.
-- **Mutually Exclusive Options**: Ensures clean command logic (e.g. `--bytes` and `--words` cannot be combined).
+- **Multiple Output Modes**: Run one or multiple calculations simultaneously (using `length`, `bytes`, `words`, or `all`).
 
 ## Installation
 
@@ -29,8 +29,13 @@ Ensure you have Python 3.9+ installed.
 
 ## Usage
 
-You can run the CLI via Poetry:
+If you have installed the package in editable mode or activated the virtual environment, you can run the CLI directly:
 
+```bash
+textlen "your string"
+```
+
+*Note: If the virtual environment is not activated, you can prepend `poetry run`:*
 ```bash
 poetry run textlen "your string"
 ```
@@ -40,14 +45,14 @@ poetry run textlen "your string"
 | Option | Short Flag | Description |
 | :--- | :--- | :--- |
 | `--trim` | `-t` | Trim leading and trailing whitespace. |
-| `--mode` | `-m` | Metric to calculate (`length`, `bytes`, `words`). Defaults to `length`. |
+| `--mode` | `-m` | Metric(s) to calculate (`length`, `bytes`, `words`, `all`). Can be specified multiple times. Defaults to `length`. |
 | `--help` | | Show the help message and exit. |
 
 ### Examples
 
 #### 1. Basic Character Count
 ```bash
-poetry run textlen "Camila"
+textlen "Camila"
 ```
 Output:
 ```text
@@ -57,7 +62,7 @@ Length: 6
 
 #### 2. Trim Whitespace
 ```bash
-poetry run textlen "   hello world   " --trim
+textlen "   hello world   " --trim
 ```
 Output:
 ```text
@@ -67,7 +72,7 @@ Length: 11
 
 #### 3. Count Bytes (UTF-8 support)
 ```bash
-poetry run textlen "café" --mode bytes
+textlen "café" --mode bytes
 ```
 Output:
 ```text
@@ -77,12 +82,35 @@ Bytes: 5
 
 #### 4. Count Words
 ```bash
-poetry run textlen "hello world from textlen" --mode words
+textlen "hello world from textlen" --mode words
 ```
 Output:
 ```text
 String: hello world from textlen
 Words: 4
+```
+
+#### 5. Multiple Modes Simultaneously
+```bash
+textlen "test" --mode bytes --mode words
+```
+Output:
+```text
+String: test
+Bytes: 4
+Words: 1
+```
+
+#### 6. Calculate All Metrics
+```bash
+textlen "test" --mode all
+```
+Output:
+```text
+String: test
+Length: 4
+Bytes: 4
+Words: 1
 ```
 
 ## Development
