@@ -12,18 +12,18 @@ def test_app():
     assert "Camila" in result.stdout
 
 def test_bytes_option():
-    """Test byte counting with --bytes flag"""
+    """Test byte counting with --mode bytes option"""
     # ASCII characters: 1 byte each
-    result = runner.invoke(app, ["hello", "--bytes"])
+    result = runner.invoke(app, ["hello", "--mode", "bytes"])
     assert result.exit_code == 0
     assert "Bytes: 5" in result.stdout
     
     # UTF-8 emoji: multi-byte characters
-    result = runner.invoke(app, ["café", "--bytes"])
+    result = runner.invoke(app, ["café", "--mode", "bytes"])
     assert result.exit_code == 0
     assert "Bytes: 5" in result.stdout  # c=1, a=1, f=1, é=2 bytes
     
-    # Without --bytes flag (character count)
+    # Without --mode option (default to length)
     result = runner.invoke(app, ["café"])
     assert result.exit_code == 0
     assert "Length: 4" in result.stdout  # 4 characters
@@ -43,21 +43,21 @@ def test_trim_option():
     assert "Length: 11" in result.stdout  # trimmed spaces
     
 def test_words_option():
-    """Test word counting with --words flag"""
+    """Test word counting with --mode words option"""
     input_string = "hello world from textlen"
     
-    # With --words flag
-    result = runner.invoke(app, [input_string, "--words"])
+    # With --mode words
+    result = runner.invoke(app, [input_string, "--mode", "words"])
     assert result.exit_code == 0
     assert "Words: 4" in result.stdout  # 4 words
     
-    # Without --words flag (character count)
+    # Without --mode option (default to length)
     result = runner.invoke(app, [input_string])
     assert result.exit_code == 0
     assert "Length: 24" in result.stdout  # includes spaces
 
-def test_mutually_exclusive_options():
-    """Test that --bytes and --words cannot be used together"""
-    result = runner.invoke(app, ["hello", "--bytes", "--words"])
+def test_invalid_mode_option():
+    """Test that an invalid mode is rejected by Typer"""
+    result = runner.invoke(app, ["hello", "--mode", "invalid_value"])
     assert result.exit_code != 0
-    assert "Cannot use --bytes and --words together" in result.stdout
+    assert "Invalid value for '--mode'" in result.stdout or "Error" in result.stdout
